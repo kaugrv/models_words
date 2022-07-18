@@ -1,1 +1,1 @@
-For more : https://wendy-gervais.gitbook.io/des-modeles-et-des-mots/trois-lignes (FR)
+_Lire en [Français](https://github.com/kaugrv/models_words/blob/main/README.md)_
