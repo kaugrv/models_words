@@ -1,3 +1,5 @@
+_Read this in [English]_
+
 # Des modèles et des mots – Trois lignes
 
 ## Avant-propos
@@ -40,7 +42,7 @@ $$ \prod_{i=1}^{3} (4 \times 128) = (4 \times 128)^3 = 134217728 $$
 
 c'est-à-dire 134 millions d'images possibles. En générant 10 000 d'entre elles, on couvre 0.007% d'images de la classe – autant dire que nous sommes certain de générer 10 000 images strictement différentes mais similaires. Cette homogénéité relative sera utile pour entraîner notre réseau. Ce dataset sera chargé lors de l'entraînement, à l'aide de le la fonction `load_dataset` de [loaders.py](https://github.com/kaugrv/models_words/blob/main/utils/loaders.py).
 
-[^3]: Les couleurs exactes choisies sont tirées du travail de Piet Mondrian (Cf. _Trafalgar Square_, Piet Mondrian, 1943 ; reproduction in _[Museum of Modern Art](https://www.moma.org/collection/works/79879)), en référence au _Mondrian Project_ de Frieder Nake : _"J'ai écrit un programme, “Project Mondrian”. Écrire un programme qui génère une structure avec ces lignes noires est assez simple. Ajouter une fonction pour colorer certaines des cellules en jaune, rouge ou bleu est trivial au premier abord. Mais, maintenant, ne serait-ce qu’approcher l’effort de Mondrian de créer harmonie et équilibre [...] C'est très difficile."._
+[^3]: Les couleurs exactes choisies sont tirées du travail de Piet Mondrian (Cf. _Trafalgar Square_, Piet Mondrian, 1943 ; reproduction in _[Museum of Modern Art]_ (https://www.moma.org/collection/works/79879)), en référence au _Mondrian Project_ de Frieder Nake : _"J'ai écrit un programme, “Project Mondrian”. Écrire un programme qui génère une structure avec ces lignes noires est assez simple. Ajouter une fonction pour colorer certaines des cellules en jaune, rouge ou bleu est trivial au premier abord. Mais, maintenant, ne serait-ce qu’approcher l’effort de Mondrian de créer harmonie et équilibre [...] C'est très difficile."._
 
 ## Architecture
 
@@ -127,7 +129,11 @@ Il est possible d'observer l'évolution de la perte (_loss_, c'est-à-dire la no
 
 Nous pouvons aussi voir ces données de manière graphique, en générant une représentation de la convergence de l'entraînement :
 
-![Graphe](https://user-images.githubusercontent.com/103901906/177615266-41ff49a0-16de-42bf-be11-5ed55a44dcc8.png) ![Légende](https://user-images.githubusercontent.com/103901906/177614854-75bcd83a-f65f-429c-b229-ffcb1738e8f7.png)
+
+<img src="https://user-images.githubusercontent.com/103901906/177615266-41ff49a0-16de-42bf-be11-5ed55a44dcc8.png" alt="Graphe" width="400"></img>
+<img src="https://user-images.githubusercontent.com/103901906/177614854-75bcd83a-f65f-429c-b229-ffcb1738e8f7.png" alt="Légende" width="200"></img>
+
+
 
 On peut ainsi observer l'évolution de l'entraînement, et la convergence des _loss_ : ici par exemple, la différence en moyenne entre les images réelles (_real_, issues du _batch_) et fausses (_fake_, générées par le générateur) tend vers 0 à partir d'environ 1100 époques. C'est donc à ce stade que l'entraînement est devenu assez satisfaisant pour l'arrêter.
 
@@ -158,13 +164,21 @@ Pour aller plus loin, une seconde version du [Notebook, "Inference +"](https://c
 
 * afficher le vecteur Z (vecteur 100 ici) sous la forme d'un images de 10x10 carrés, avec la fonction `printZ`. Exemples d'images générées avec la représentation du vecteur Z associé :
 
-![](https://user-images.githubusercontent.com/103901906/178315053-f114c50f-4e11-4750-9846-19002c30553a.png) ![](https://user-images.githubusercontent.com/103901906/178315771-00b5226d-bb5b-4c88-a091-59c70135336a.png)
+<img src="https://user-images.githubusercontent.com/103901906/178315771-00b5226d-bb5b-4c88-a091-59c70135336a.png" width="85"></img>
+<img src="https://user-images.githubusercontent.com/103901906/178315053-f114c50f-4e11-4750-9846-19002c30553a.png" width="128"></img>
 
-![](https://user-images.githubusercontent.com/103901906/178315944-5dab8c66-eaad-4872-b45b-38311e176ec4.png) ![](https://user-images.githubusercontent.com/103901906/178315953-689183b3-15ca-497a-ba4b-5456342083c2.png)
+<img src="https://user-images.githubusercontent.com/103901906/178315953-689183b3-15ca-497a-ba4b-5456342083c2.png" width="85"></img>
+<img src="https://user-images.githubusercontent.com/103901906/178315944-5dab8c66-eaad-4872-b45b-38311e176ec4.png" width="128"></img>
 
-![](https://user-images.githubusercontent.com/103901906/178316192-73627c6d-faf6-4a06-9f5a-6600c61e43e7.png) ![](https://user-images.githubusercontent.com/103901906/178316212-068b2a10-08f3-4601-a69c-dc89c242755b.png)
+<img src="https://user-images.githubusercontent.com/103901906/178316212-068b2a10-08f3-4601-a69c-dc89c242755b.png" width="85"></img>
+<img src="https://user-images.githubusercontent.com/103901906/178316192-73627c6d-faf6-4a06-9f5a-6600c61e43e7.png" width="128"></img>
 
-* de là, étudier le vecteur Z et son influence sur la génération en n'utilisant plus `generate_latent_point` mais en fabriquant le tableau `pts` avec d'autres méthodes
+Attention cependant, l'échelle des couleurs est relative (un niveau de gris ne représentera pas la même valeur d'une représentation à une autre).
+
+* de là, étudier le vecteur Z et son influence sur la génération en n'utilisant plus `generate_latent_point` mais en fabriquant le tableau `pts` avec d'autres méthodes. Des exemples, certains animés, sont visibles dans [le dossier lines](https://github.com/kaugrv/models_words/tree/main/lines/vec100%20examples). Ici les valeurs ont été affichées pour donner une grille sous la forme d'une _heatmap_, on remarque d'ailleurs la relativité de l'échelle des couleurs : 
+
+![Animation Vec 100](https://user-images.githubusercontent.com/103901906/179551589-21db9a60-733c-49a2-830b-2f749c7af4e4.gif)
+
 * générer en nombre des images par paires _non interpolées_. Le nombre de paires est paramétrable avec `nb_inf`
 * exporter le vecteur Z associé à une paire de deux images dans un fichier texte. Ainsi, il sera possible d'importer les coordonnées d'un vecteur dans l'_Inference_ et donc d'obtenir de nouveau l'image associée (éventuellement les interpoler, les étudier...) en utilisant les _arrays_ exportés dans _Vec##.txt_
 
@@ -172,7 +186,7 @@ Pour aller plus loin, une seconde version du [Notebook, "Inference +"](https://c
 
 ## Super-résolution
 
-À l'issue de l'inférence, nous avons choisi d'améliorer la résolution de nos images interpolées, toujours grâce à un algorithme (écrit par Adrish Dey[^7]). La partie dédiée _Super Resolution_ se trouve dans le Notebook de l'Inference (et Inference +), à la suite de l'interpolation, pour être appliquée directement sur les images obtenues.
+À l'issue de l'inférence, nous avons choisi d'améliorer la résolution de nos images interpolées, toujours grâce à un algorithme (écrit par Adrish Dey[^4]). La partie dédiée _Super Resolution_ se trouve dans le Notebook de l'Inference (et Inference +), à la suite de l'interpolation, pour être appliquée directement sur les images obtenues.
 
 On passe ainsi d'une image de 128x128 à une image de 512x512 (on multiplie les dimensions par 4) :
 
