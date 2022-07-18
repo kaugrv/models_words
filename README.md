@@ -32,7 +32,7 @@ Chaque image de notre dataset est au format 128 par 128 pixels. Sur fond noir, o
 - rouge
 - bleu
 
-![Extrait du dataset](https://user-images.githubusercontent.com/103901906/177947584-f2a123c8-588c-452f-b9cd-e77f1bc44014.png)
+![Extrait du dataset](https://user-images.githubusercontent.com/103901906/179547588-a322ef87-3ee4-4d77-b573-b6f613bf541a.png)
 
 On peut calculer le nombre d'images contenue dans la classe. Chacune des 3 lignes comporte une abscisse (si verticale) ou une ordonnée (si horizontale) comprise entre 0 et 128, et possède une couleur choisie aléatoirement parmi 4. Le nombre de lignes verticales et horizontales étant fixé, on a donc :
 
