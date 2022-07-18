@@ -1,4 +1,4 @@
-_Read this in [English]_
+_Read this in [English](https://github.com/kaugrv/models_words/blob/main/README_EN.md)_
 
 # Des modèles et des mots – Trois lignes
 
@@ -81,9 +81,9 @@ La matrice de convolution associée à ce générateur est de taille 10 x 10, pa
 
 D'autres dimensions de la convolution pourraient être explorées en fonction de nouveaux datasets. Pour plus de détails sur la convolution, voir _[Convolution arithmetic](https://github.com/vdumoulin/conv_arithmetic)_.
 
-![Générateur](https://user-images.githubusercontent.com/103901906/178373074-040b6efc-fd35-4e73-b940-6bddc711a6d1.png)
+![Générateur](https://user-images.githubusercontent.com/103901906/179565557-e17c1acc-e9a2-48c1-aa5e-973d7caf03d2.png)
 
-![Discriminateur](https://user-images.githubusercontent.com/103901906/178373081-d166af71-1b38-40b7-9993-12dee8ff10a8.png)
+![Critique](https://user-images.githubusercontent.com/103901906/179565848-3a8334e6-1680-4085-9bad-cbcb81c8d142.png)
 
 _Représentations graphiques des layers constituant le générateur et le discriminateur, réalisées avec l'outil NN-SVG d'[Alex LeNail](https://github.com/alexlenail/NN-SVG). On observe en 3D l'articulation des layers et leurs dimensions successives, en proportions réelles en haut à droite et arangées pour une meilleure lisibilité au centre._
 
