@@ -1,30 +1,30 @@
-Pour en savoir plus : https://wendy-gervais.gitbook.io/des-modeles-et-des-mots/trois-lignes (FR)
-
 # Des modèles et des mots – Trois lignes
 
 ## Avant-propos
 
 _Des Modèles et des Mots_ s'inscrit dans un projet de recherche en art et en deep learning génératif. Le code présenté ici soutient un travail exploratoire sur les GANs (Generative Adversarial Networks, ou Réseaux antagonistes génératifs). Ces modèles d'architecture sont établis depuis quelques années dans la recherche informatique, employés pour produire des médias de synthèse à partir de large base de données d'images. Ce support est pensé en tant qu'environnement de travail ou *framework*, base à compléter et à explorer, pour quiconque souhaiterait découvrir, façonner ou critiquer ce type de modèle dans un contexte de recherche et d'expérimentation visuelle.
 
-Les GANs sont le plus souvent envisagé pour la production automatisée des images, en employant des données d'entraînement à partir de photographies ou de dessins produits à la main – des données observées dans le réel, où bien souvent, la figuration prévaut sur l'asbtraction. Dans le cas présenté ici, nous nous intéressons principalement à des des données d'entrainement qui sont des données de synthèse, c'est à dire des données générées par un algorithme par le truchement de variables aléatoires, en référence au champs du Computer Art[^1]. À ceci s'ajoute une recherche sur le temps et le mouvement, tels que ces constituants apparaîssent en potentiel dans l'exploration de l'espace latent[^2] d'un GAN. L'une des perspectives proposée ici est bien la création de séquences d'images nouvelles, issues de fonctions de parcourt dans l'espace ou la « vision » du modèle entraîné.
+Les GANs sont le plus souvent envisagés pour la production automatisée des images, en employant des données d'entraînement à partir de photographies ou de dessins produits à la main – des données observées dans le réel, où bien souvent, la figuration prévaut sur l'abstraction. Dans le cas présenté ici, nous nous intéressons principalement à des données d'entrainement qui sont des données de synthèse, c'est à dire des données générées par un algorithme par le truchement de variables aléatoires, en référence au champ du Computer Art[^1]. À ceci s'ajoute une recherche sur le temps et le mouvement, tels que ces constituants apparaîssent en potentiel dans l'exploration de l'espace latent[^2] d'un GAN. L'une des perspectives proposées ici est bien la création de séquences d'images nouvelles, issues de fonctions de parcour dans l'espace ou la « vision » du modèle entraîné.
 
-Principalement écrits en Python, et avec le support des Notebooks Jupyter, le code est commenté de façon à guider le profane à travers le différentes partie du framework. Autant que possible, les aspects visuels de la démarche sont mis en avant : les données d'entraînement, l'architecture du GAN et les résultats. D'une façon générale, l'apprentissage profond est un sujet technique complexe – du fait de la très grande dimension des architectures inhérentes aux modèles d'apprentissage profond (le terme de boite noire est un terme adapté pour expliquer ce problème). Tout en réfléchissant à la lisibilité de ces modèles, c'est l'exploration artistique et pédagogique qui constitue la motivation essentielle dans la démarche présentée ici.
+Principalement écrits en Python, et avec le support de trois Notebooks Jupyter distincts (Training, Inference, Inference+), le code est commenté de façon à guider le profane à travers le différentes partie du framework. Autant que possible, les aspects visuels de la démarche sont mis en avant : les données d'entraînement, l'architecture du GAN et les résultats. [Les trois Notebooks](https://github.com/kaugrv/models_words/tree/main/notebooks) expliqués ci-après sont utilisables dans un environnement local (Anaconda, ... voir [Generative Deep Drawing](https://github.com/leogenot/DeepDrawing) pour la configuration), mais sont également pré-configurés sur [Google Colaboratory](https://colab.research.google.com/drive/12WCzKlR--V8E7HMZHJ89nobVDCknCKmE#scrollTo=C7vmECVpwSZm), qui ne requiert aucune installation préablable et est adapté à l'exécution. 
 
-[^1]: Le Computer Art est entendu ici comme un champ iconographique à part entière, caractérisable par par de nombreuses références à l'abstraction géométrique, à l'art conceptuel, et événetuellement au minimalisme. L'utilisation de l'aléatoire dans le Computer Art et son inscription dans le courant de l'esthétique générative est tout aussi notable. 
+D'une façon générale, l'apprentissage profond est un sujet technique complexe – du fait de la très grande dimension des architectures inhérente aux modèles d'apprentissage profond (le terme de boîte noire est un terme adapté pour expliquer ce problème). Tout en réfléchissant à la lisibilité de ces modèles, c'est l'exploration artistique et pédagogique qui constitue la motivation essentielle de la démarche présentée ici.
+
+[^1]: Le Computer Art est entendu ici comme un champ iconographique à part entière, caractérisable par de nombreuses références à l'abstraction géométrique, à l'art conceptuel, et événetuellement au minimalisme. L'utilisation de l'aléatoire dans le Computer Art et son inscription dans le courant de l'esthétique générative est tout aussi notable. 
 
 [^2]: L'espace latent est l'espace théorique contenant les "points", ou vecteurs, support des motifs récurrents interprétables par le réseau, qu'il va analyser et traiter afin de générer les images finales.
 
 ## Fondations
 
-Cette démarche se fonde en partie sur une expérience pédagogique avec des étudiants ingénieurs en art et science (formation IMAC, ESIPE-ESIEE) qui a consisté à étudier le Computer Art à travers des artistes pionniers comme Frieder Nake, Véra Molnar, Georg Nees et Manfred Mohr. Après avoir choisi une oeuvre dans un corpus, les étudiants ont été amené a penser et coder le répèrtoire visuel et algorithmique du corpus de façon entraîner un réseau à être informé par ce référant visuel. Dans cette démarche, deux processus génératifs sont enchassés : le premier pour générer des données de façon synthétique, le second pour explorer l'espace de représentation (l'espace latent) du réseau une fois entrainé. Les données d'entraînements présentées ici – les « Trois lignes », et leur méthode de production, sont directement tirées de l'expérience pédagogique décrite ci-dessus. 
+Cette démarche se fonde en partie sur une expérience pédagogique avec des étudiants ingénieurs en art et science (formation IMAC, ESIPE-ESIEE) qui a consisté à étudier le Computer Art à travers des artistes pionniers comme Frieder Nake, Véra Molnar, Georg Nees et Manfred Mohr. Après avoir choisi une oeuvre dans un corpus, les étudiants ont été amenés à penser et coder le répèrtoire visuel et algorithmique du corpus de façon entraîner un réseau à être informé par ce référant visuel. Dans cette démarche, deux processus génératifs sont enchassés : le premier pour générer des données de façon synthétique, le second pour explorer l'espace de représentation (l'espace latent) du réseau une fois entrainé. Les données d'entraînements présentées ici – les « Trois lignes », et leur méthode de production, sont directement tirées de l'expérience pédagogique décrite ci-dessus. 
 
-<!-- Deux phrases sur Deep Drawing, cf documentation -->
+La base algorithmique (explications et architecture de David Foster, voir Ressources) a également été explorée lors du projet tutoré _Generative Deep Drawing_ mené par des étudiants de deuxième année de la même filière, projet fondé sur la production de dessins, toujours à l'aide de réseaux neuronaux. Voir [Deep Drawing sur GitHub](https://github.com/leogenot/DeepDrawing).
 
 ## Données d'entraînement
 
-Cette étude repose sur un ensemble de 10 000 images élémentaires et semblables, appelé « dataset », généré à l'aide d'un code Java écrit et executé dans l'environnement de programmation Processing. Le code permettant de générer ces images est disponible dans le [dossier « lines »](https://github.com/kaugrv/gantraining/tree/main/lines).
+Cette étude repose sur un ensemble de 10 000 images élémentaires et semblables, appelé « dataset », généré à l'aide d'un code Java écrit et exécuté dans l'environnement de programmation Processing. Le code permettant de générer ces images est disponible dans le [dossier « lines »](https://github.com/kaugrv/models_words/blob/main/lines/lines.pde).
 
-Cet ensemble d'images constitue une seule et même classe, car chacune d'elle suit individuellement les mêmes règles de constructions, détaillées ci-après et strictement dictées par l'algorithme Java exécuté pour les produire en nombre. Cela en fait un dataset synthétique et algorthmique contenant des images simples, différentes mais semblables.
+Cet ensemble d'images constitue une seule et même classe, car chacune d'elle suit individuellement les mêmes règles de construction, détaillées ci-après et strictement dictées par l'algorithme Java exécuté pour les produire en nombre. Cela en fait un dataset synthétique et algorithmique, contenant des images simples, différentes mais semblables.
 
 Chaque image de notre dataset est au format 128 par 128 pixels. Sur fond noir, on génère 3 lignes d'épaisseur 5 pixels. On distingue une ligne verticale et deux horizontales. Leur position dans l'image est définie de façon aléatoire (loi uniforme sur la largeur ou la hauteur de l'image). Leurs couleurs sont également aléatoires (loi uniforme sur [0,3]). Chacune des 3 lignes peut prendre la couleur suivante[^3] :
 - blanc
@@ -38,9 +38,9 @@ On peut calculer le nombre d'images contenue dans la classe. Chacune des 3 ligne
 
 $$ \prod_{i=1}^{3} (4 \times 128) = (4 \times 128)^3 = 134217728 $$  
 
-c'est-à-dire 134 millions d'images possibles. En générant 10 000 d'entre elles, on couvre 0.007% d'images de la classe – autant dire que nous sommes certain de générer 10 000 images strictement différentes mais similaires. Cette homogénéité relative sera utile pour entraîner notre réseau. Ce dataset sera chargé lors de l'entraînement, à l'aide de le la fonction `load_dataset` de [loaders.py](https://github.com/kaugrv/gantraining/blob/main/utils/loaders.py).
+c'est-à-dire 134 millions d'images possibles. En générant 10 000 d'entre elles, on couvre 0.007% d'images de la classe – autant dire que nous sommes certain de générer 10 000 images strictement différentes mais similaires. Cette homogénéité relative sera utile pour entraîner notre réseau. Ce dataset sera chargé lors de l'entraînement, à l'aide de le la fonction `load_dataset` de [loaders.py](https://github.com/kaugrv/models_words/blob/main/utils/loaders.py).
 
-[^3]: Les couleurs exactes choisies sont tirées du travail de Piet Mondrian (Cf. _Trafalgar Square_, Piet Mondrian, 1943 ; reproduction in --_[Museum of Modern Art](https://www.moma.org/collection/works/79879)), en référence au _Mondrian Project_ de Frieder Nake : "J'ai écrit un programme, “Project Mondrian”. Écrire un programme qui génère une structure avec ces lignes noires est assez simple. Ajouter une fonction pour colorer certaines des cellules en jaune, rouge ou bleu est trivial au premier abord. Mais, maintenant, ne serait-ce qu’approcher l’effort de Mondrian de créer harmonie et équilibre [...] C'est très difficile.".
+[^3]: Les couleurs exactes choisies sont tirées du travail de Piet Mondrian (Cf. _Trafalgar Square_, Piet Mondrian, 1943 ; reproduction in _[Museum of Modern Art](https://www.moma.org/collection/works/79879)), en référence au _Mondrian Project_ de Frieder Nake : _"J'ai écrit un programme, “Project Mondrian”. Écrire un programme qui génère une structure avec ces lignes noires est assez simple. Ajouter une fonction pour colorer certaines des cellules en jaune, rouge ou bleu est trivial au premier abord. Mais, maintenant, ne serait-ce qu’approcher l’effort de Mondrian de créer harmonie et équilibre [...] C'est très difficile."._
 
 ## Architecture
 
@@ -48,7 +48,7 @@ Le réseau *Trois lignes* est un GAN codé en Python, basé sur le travail et le
 
 Rappelons qu'un GAN se constitue d'un générateur et d'un discriminateur (que l'on appelle critique). Le GAN repose sur la concurrence de ces deux réseaux : le générateur crée des échantillons, visuels ici, et les soumet au discriminateur qui les "note", tentant de déterminer si l'image qu'il analyse est une image réelle (issue des données d'entraînement) ou fausse (produite par le générateur). Le générateur produit alors des images de plus en plus enclines à tromper l'appréciation du discriminateur.   
 
-Cette architecure est écrite dans le modèle [WGANGP.py](https://github.com/kaugrv/gantraining/blob/main/models/WGANGP.py). Dans l'entraînement, le modèle est instancié pour travailler sur des images de 128 x 128 ; à l'entrée du générateur le vecteur Z est de dimension 100. Voici également les paramètres choisis pour les différentes _layers_ (discriminateur, générateur) constitués principalement des _layers_ de convolution, qui sont des matrices (_filters, kernel_ et _strides_) :
+Cette architecure est écrite dans le modèle [WGANGP.py](https://github.com/kaugrv/models_words/blob/main/models/WGANGP.py). Dans l'entraînement, le modèle est instancié pour travailler sur des images de 128 x 128 ; à l'entrée du générateur le vecteur Z est de dimension 100. Voici également les paramètres choisis pour les différentes _layers_ (discriminateur, générateur) constitués principalement des _layers_ de convolution, qui sont des matrices (_filters, kernel_ et _strides_) :
 
 ```
 gan = WGANGP(input_dim=(IMAGE_SIZE, IMAGE_SIZE, 3), 
@@ -83,13 +83,13 @@ D'autres dimensions de la convolution pourraient être explorées en fonction de
 
 ![Discriminateur](https://user-images.githubusercontent.com/103901906/178373081-d166af71-1b38-40b7-9993-12dee8ff10a8.png)
 
-_Représentations graphiques des layers constituant le générateur et le discriminateur, réalisées avec l'outil NN-SVG d'[Alex LeNail](https://github.com/alexlenail/NN-SVG). On observe en 3D l'articulation des layers et leurs dimensions successives, en proportions réelles en haut à droite et arangées pour une meilleur lisibilité au centre._
+_Représentations graphiques des layers constituant le générateur et le discriminateur, réalisées avec l'outil NN-SVG d'[Alex LeNail](https://github.com/alexlenail/NN-SVG). On observe en 3D l'articulation des layers et leurs dimensions successives, en proportions réelles en haut à droite et arangées pour une meilleure lisibilité au centre._
 
 ## Entraînement
 
-La partie effective de l'entraînement est exécutable dans le Notebook [Training](notebooks/Training\_Wendy.ipynb). S'il est exécutable depuis un environnement Jupyter local (Anaconda,...), nous recommandons de le lancer directement depuis un Google Colaboratory[^4].
+La partie effective de l'entraînement est exécutable dans le Notebook [Training](https://colab.research.google.com/drive/12WCzKlR--V8E7HMZHJ89nobVDCknCKmE#scrollTo=C7vmECVpwSZm) sur Google Colab.
 
-Après avoir cloné ce dépôt, on travaillera à sa racine, /gantraining. Il est possible d'utiliser le dataset _lines_ décrit plus haut ou bien d'en utiliser un nouveau (en l'uploadant directement dans l'environnement Colab via une cellule ou en remplaçant le fichier output.zip). Au moins 10 000 images (format 128x128) sont conseillées, à placer dans un fichier _output.zip_, mais selon la complexité des images, davantage seront peut-être nécessaires.
+Après avoir cloné ce dépôt, on travaillera à sa racine, /models_words. Il est possible d'utiliser le dataset _lines_ décrit plus haut ou bien d'en utiliser un nouveau (en l'uploadant directement dans l'environnement Colab via une cellule ou en remplaçant le fichier data.zip). Au moins 10 000 images (format 128x128) sont conseillées, à placer dans un fichier data.zip_, mais selon la complexité des images, davantage seront peut-être nécessaires.
 
 Les premières cellules servent à charger le modèle et les bibliothèques, puis à charger le dataset. Il est possible de configurer les paramètres de l'entraînement, notamment le numéro de l'entraînement que l'on va lancer (`RUN_ID`), ou le `BATCH_SIZE`, c'est-à-dire le nombre d'images du dataset présentées au réseau lors d'une itération. Par défaut, il est paramétré à 16, l'augmenter rendra le temps de calcul plus long, mais peut permettre d'améliorer la précision de l'entraînement (garder une puissance de 2, comme 32, 64 ou 128). Après avoir chargé le dataset (celui-ci devrait bien renvoyer `Found ... images belonging to 1 classes.`) et paramétré le GAN (comme expliqué plus haut dans _Architecture_), d'autres paramètres de l'entraînement sont modifiables :
 
@@ -133,13 +133,9 @@ On peut ainsi observer l'évolution de l'entraînement, et la convergence des _l
 
 L'image de ce graphe sera enregistrée avec les _samples_ en tant que _converge.png_. Finalement des cellules permettent pour un environnement Google Colab de télécharger premièrement toutes les images, et enfin le fichier generator.h5, le fichier du générateur du réseau lié à cet entraînement, qui sera indispensable pour la partie suivante : l'_Inference_.
 
-[^4]: Lien du Colab _Training_ : [www](https://colab.research.google.com/drive/1YspG4yXfPcr9Nixi8gEnk0vb0mssW9aQ?usp=sharing)
-
 ## Inference
 
-La partie _Inference_ se donne pour objectif d'explorer _l'espace latent_, l'espace contenant les données interprétables par le réseau qui lui sera capable de générer les images, une fois que l'entraînement a été effectué avec le Notebook précédent. Il faudra pour cela se munir de fichier du générateur _generator.h5_ et utiliser le [second Notebook](notebooks/Inference\_Wendy.ipynb) que nous conseillons aussi d'utiliser depuis Google Colaboratory.[^5]
-
-[^5]: Lien du Colab _Inference_ : [www](https://colab.research.google.com/drive/1c2HzZqP6gcCGo26U4SWgrO70OirggsFU#scrollTo=FVovpnd9cSuE)
+La partie _Inference_ se donne pour objectif d'explorer _l'espace latent_, l'espace contenant les données interprétables par le réseau qui lui sera capable de générer les images, une fois que l'entraînement a été effectué avec le Notebook précédent. Il faudra pour cela se munir de fichier du générateur _generator.h5_ et utiliser le [second Notebook, "Inference"](https://colab.research.google.com/drive/1c2HzZqP6gcCGo26U4SWgrO70OirggsFU#scrollTo=FVovpnd9cSuE), depuis Google Colaboratory.
 
 L'idée générale de cette exploration est d'étudier les images que le réseau est désormais capable de générer à l'issue de l'entraînement. En utilisant le fichier du générateur datant de la dernière époque de celui-ci, il va être possible de générer à l'envi de nouvelles images relevant de la même classe que les images générées par le réseau lors de la dernière époque. Il sera aussi possible de les étudier, et les _interpoler_ entre elles (c'est-à-dire introduire des vecteurs intermédiaires entre des vecteurs générés).
 
@@ -158,7 +154,7 @@ Pour résumer, pour explorer et interpoler les points de l'espace latent et les 
 
 ## Inference +
 
-Pour aller plus loin, une seconde version du [Notebook](notebooks/Inference\_Wendy\_+\_\(Vec100,\_infer\_by\_groups\).ipynb) (disponible sur Colab [^6]) ajoute quelques fonctionnalités supplémentaires :
+Pour aller plus loin, une seconde version du [Notebook, "Inference +"](https://colab.research.google.com/drive/14oww73GEQrECNtgaj8iK78jSw8GtHIiE), ajoute quelques fonctionnalités supplémentaires :
 
 * afficher le vecteur Z (vecteur 100 ici) sous la forme d'un images de 10x10 carrés, avec la fonction `printZ`. Exemples d'images générées avec la représentation du vecteur Z associé :
 
@@ -172,11 +168,11 @@ Pour aller plus loin, une seconde version du [Notebook](notebooks/Inference\_Wen
 * générer en nombre des images par paires _non interpolées_. Le nombre de paires est paramétrable avec `nb_inf`
 * exporter le vecteur Z associé à une paire de deux images dans un fichier texte. Ainsi, il sera possible d'importer les coordonnées d'un vecteur dans l'_Inference_ et donc d'obtenir de nouveau l'image associée (éventuellement les interpoler, les étudier...) en utilisant les _arrays_ exportés dans _Vec##.txt_
 
-[^6]: Lien du Colab _Inference +_ : [www](https://colab.research.google.com/drive/1YiNPna7zbjVTpUHuKrvVuI1BSTit5Nq3#scrollTo=eYTWmfLfoj\_7)
+[^3]: Lien du Colab _Inference +_ : [www](https://colab.research.google.com/drive/1YiNPna7zbjVTpUHuKrvVuI1BSTit5Nq3#scrollTo=eYTWmfLfoj\_7)
 
 ## Super-résolution
 
-À l'issue de l'inférence, nous avons choisi d'améliorer la résolution de nos images interpolées, toujours grâce à un algorithme (écrit par Adrish Dey[^7]). La partie dédiée _Super Resolution_ se trouve dans le Notebook de l'Inference, à la suite de l'interpolation, pour être appliquée directement sur les images obtenues.
+À l'issue de l'inférence, nous avons choisi d'améliorer la résolution de nos images interpolées, toujours grâce à un algorithme (écrit par Adrish Dey[^7]). La partie dédiée _Super Resolution_ se trouve dans le Notebook de l'Inference (et Inference +), à la suite de l'interpolation, pour être appliquée directement sur les images obtenues.
 
 On passe ainsi d'une image de 128x128 à une image de 512x512 (on multiplie les dimensions par 4) :
 
@@ -186,7 +182,7 @@ L'algorithme s'applique sur toutes les images obtenues par l'interpolation. La d
 
 ![Animation Super-résolution](https://user-images.githubusercontent.com/103901906/177619339-3cf28dfd-ff00-4761-a659-66a02d5e5abe.gif)
 
-[^7]: Voir sur Tfhub : [esrgan by captain-pool](https://tfhub.dev/captain-pool/esrgan-tf2/1)
+[^4]: Voir sur Tfhub : [esrgan by captain-pool](https://tfhub.dev/captain-pool/esrgan-tf2/1)
 
 ## Résultats
 
@@ -208,3 +204,5 @@ Forked depuis [leogenot/DeepDrawing](https://github.com/leogenot/DeepDrawing)
 * [_Generative Deep Learning: Teaching Machines to Paint, Write, Compose, and Play,_ David Foster](https://www.amazon.fr/Generative-Deep-Learning-Teaching-Machines/dp/1492041947)
 * [Keras](https://keras.io/api/)
 * [Tensorflow](https://www.tensorflow.org)
+
+Gaëtan Robillard, Özlem Sulak, Sofia Mahtallah, Vincent Nozick, Wendy Gervais
