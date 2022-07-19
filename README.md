@@ -141,7 +141,7 @@ L'image de ce graphe sera enregistrée avec les _samples_ en tant que _converge.
 
 ## Inference
 
-La partie _Inference_ se donne pour objectif d'explorer _l'espace latent_, l'espace contenant les données interprétables par le réseau qui lui sera capable de générer les images, une fois que l'entraînement a été effectué avec le Notebook précédent. Il faudra pour cela se munir de fichier du générateur _generator.h5_ et utiliser le [second Notebook, "Inference"](https://colab.research.google.com/drive/1c2HzZqP6gcCGo26U4SWgrO70OirggsFU#scrollTo=FVovpnd9cSuE), depuis Google Colaboratory.
+La partie _Inference_ se donne pour objectif d'explorer _l'espace latent_, l'espace contenant les données interprétables par le réseau qui lui sera capable de générer les images, une fois que l'entraînement a été effectué avec le Notebook précédent. Il faudra pour cela se munir de fichier du générateur _generator.h5_ et utiliser le [second Notebook, "Inference"](https://colab.research.google.com/drive/13g3rX2zgyxT5YKTZILBrISybmLJ4_pXi), depuis Google Colaboratory.
 
 L'idée générale de cette exploration est d'étudier les images que le réseau est désormais capable de générer à l'issue de l'entraînement. En utilisant le fichier du générateur datant de la dernière époque de celui-ci, il va être possible de générer à l'envi de nouvelles images relevant de la même classe que les images générées par le réseau lors de la dernière époque. Il sera aussi possible de les étudier, et les _interpoler_ entre elles (c'est-à-dire introduire des vecteurs intermédiaires entre des vecteurs générés).
 
@@ -182,7 +182,6 @@ Attention cependant, l'échelle des couleurs est relative (un niveau de gris ne 
 * générer en nombre des images par paires _non interpolées_. Le nombre de paires est paramétrable avec `nb_inf`
 * exporter le vecteur Z associé à une paire de deux images dans un fichier texte. Ainsi, il sera possible d'importer les coordonnées d'un vecteur dans l'_Inference_ et donc d'obtenir de nouveau l'image associée (éventuellement les interpoler, les étudier...) en utilisant les _arrays_ exportés dans _Vec##.txt_
 
-[^3]: Lien du Colab _Inference +_ : [www](https://colab.research.google.com/drive/1YiNPna7zbjVTpUHuKrvVuI1BSTit5Nq3#scrollTo=eYTWmfLfoj\_7)
 
 ## Super-résolution
 
