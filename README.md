@@ -219,7 +219,7 @@ Forked depuis [leogenot/DeepDrawing](https://github.com/leogenot/DeepDrawing)
 * [Keras](https://keras.io/api/)
 * [Tensorflow](https://www.tensorflow.org)
 
-Gaëtan Robillard, Des mots et des modèles (série), 2022 – projet éditorial soutenu par l'ESIPE et la formation IMAC, Université Gustave Eiffel.
-Inclu dans la série issue de ce projet, « Trois lignes dans un espace latent » est un répertoire conçu par Gaëtan Robillard avec l'aide de Wendy Gervais.
-Remerciements: Vincent Nozick
+Gaëtan Robillard, Des mots et des modèles (série), 2022 – projet éditorial soutenu par l'ESIPE et la formation IMAC, Université Gustave Eiffel.  
+Inclus dans la série issue de ce projet, « Trois lignes dans un espace latent » est un répertoire conçu par Gaëtan Robillard avec l'aide de Wendy Gervais.
+Remerciements : Vincent Nozick  
 Le code utilisé pour le WGAN est issu de l'ouvrage _Generative Deep Learning_ de David Foster (O’Reilly).
