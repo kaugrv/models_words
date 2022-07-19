@@ -177,7 +177,8 @@ Attention cependant, l'échelle des couleurs est relative (un niveau de gris ne 
 
 * de là, étudier le vecteur Z et son influence sur la génération en n'utilisant plus `generate_latent_point` mais en fabriquant le tableau `pts` avec d'autres méthodes. Des exemples, certains animés, sont visibles dans [le dossier lines](https://github.com/kaugrv/models_words/tree/main/lines/vec100%20examples). Ici les valeurs ont été affichées pour donner une grille sous la forme d'une _heatmap_, on remarque d'ailleurs la relativité de l'échelle des couleurs : 
 
-![Animation Vec 100](https://user-images.githubusercontent.com/103901906/179551589-21db9a60-733c-49a2-830b-2f749c7af4e4.gif)
+![anim1](https://user-images.githubusercontent.com/103901906/179784656-8ac40368-075b-42d3-b950-da614857c4dc.gif)
+
 
 * générer en nombre des images par paires _non interpolées_. Le nombre de paires est paramétrable avec `nb_inf`
 * exporter le vecteur Z associé à une paire de deux images dans un fichier texte. Ainsi, il sera possible d'importer les coordonnées d'un vecteur dans l'_Inference_ et donc d'obtenir de nouveau l'image associée (éventuellement les interpoler, les étudier...) en utilisant les _arrays_ exportés dans _Vec##.txt_
