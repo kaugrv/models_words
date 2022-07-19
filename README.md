@@ -1,6 +1,11 @@
 _Read this in [English](https://github.com/kaugrv/models_words/blob/main/README_EN.md)_
 
-# Des modèles et des mots – Trois lignes
+# Des modèles et des mots – Trois lignes dans un espace latent
+
+Gaëtan Robillard, Des mots et des modèles (série), 2022 – projet éditorial soutenu par l'ESIPE et la formation IMAC, Université Gustave Eiffel.  
+Inclus dans la série issue de ce projet, « Trois lignes dans un espace latent » est un répertoire conçu par Gaëtan Robillard avec l'aide de Wendy Gervais.
+Remerciements : Vincent Nozick  
+Le code utilisé pour le WGAN est issu de l'ouvrage _Generative Deep Learning_ de David Foster (O’Reilly).
 
 ## Avant-propos
 
@@ -175,7 +180,7 @@ Pour aller plus loin, une seconde version du [Notebook, "Inference +"](https://c
 
 Attention cependant, l'échelle des couleurs est relative (un niveau de gris ne représentera pas la même valeur d'une représentation à une autre).
 
-* de là, étudier le vecteur Z et son influence sur la génération en n'utilisant plus `generate_latent_point` mais en fabriquant le tableau `pts` avec d'autres méthodes. Des exemples, certains animés, sont visibles dans [le dossier lines](https://github.com/kaugrv/models_words/tree/main/lines/vec100%20examples). Ici les valeurs ont été affichées pour donner une grille sous la forme d'une _heatmap_, on remarque d'ailleurs la relativité de l'échelle des couleurs : 
+* de là, étudier le vecteur Z et son influence sur la génération en n'utilisant plus `generate_latent_point` mais en fabriquant le tableau `pts` avec d'autres méthodes. Des exemples, certains animés, sont visibles dans [le dossier Z-anim](https://github.com/kaugrv/models_words/tree/main/Z-anim). Ici les valeurs ont été affichées pour donner une grille sous la forme d'une _heatmap_, on remarque d'ailleurs la relativité de l'échelle des couleurs : 
 
 ![anim1](https://user-images.githubusercontent.com/103901906/179784656-8ac40368-075b-42d3-b950-da614857c4dc.gif)
 
@@ -218,8 +223,3 @@ Forked depuis [leogenot/DeepDrawing](https://github.com/leogenot/DeepDrawing)
 * [_Generative Deep Learning: Teaching Machines to Paint, Write, Compose, and Play,_ David Foster](https://www.amazon.fr/Generative-Deep-Learning-Teaching-Machines/dp/1492041947)
 * [Keras](https://keras.io/api/)
 * [Tensorflow](https://www.tensorflow.org)
-
-Gaëtan Robillard, Des mots et des modèles (série), 2022 – projet éditorial soutenu par l'ESIPE et la formation IMAC, Université Gustave Eiffel.  
-Inclus dans la série issue de ce projet, « Trois lignes dans un espace latent » est un répertoire conçu par Gaëtan Robillard avec l'aide de Wendy Gervais.
-Remerciements : Vincent Nozick  
-Le code utilisé pour le WGAN est issu de l'ouvrage _Generative Deep Learning_ de David Foster (O’Reilly).
